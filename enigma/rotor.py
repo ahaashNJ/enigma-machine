@@ -15,7 +15,7 @@ class Rotor:
         signal = self.right.find(letter)
         return signal
 
-    def rotate(self, n=0):
+    def rotate(self, n=1):
         for i in range(n):
             self.left = self.left[1:] + self.left[0]
             self.right = self.right[1:] + self.right[0]
