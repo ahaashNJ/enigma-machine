@@ -1,9 +1,8 @@
 class Reflector:
 
-    def __init__(self, wiring, notch):
+    def __init__(self, wiring):
         self.left = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         self.right = wiring
-        self.notch = notch
 
     def reflect(self, signal):
         letter = self.right[signal]
