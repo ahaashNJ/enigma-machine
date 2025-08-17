@@ -8,6 +8,11 @@ class Engima:
         self.plugboard = plugboard
         self.keyboard = keyboard
 
+    def set_key(self, key):
+        self.rotor1.rotate_to_letter(key[0])
+        self.rotor2.rotate_to_letter(key[1])
+        self.rotor3.rotate_to_letter(key[2])
+
     def encipher(self, letter):
 
         # rotate the rotors
