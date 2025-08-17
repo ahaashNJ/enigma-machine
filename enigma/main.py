@@ -2,7 +2,7 @@ from keyboard import Keyboard
 from plugboard import Plugboard
 from rotor import Rotor
 from reflector import Reflector
-from enigma import Engima
+from enigma import Enigma
 
 # historical enigma rotors and reflectors
 I = Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q")
@@ -19,15 +19,18 @@ KB = Keyboard()
 PB = Plugboard(["AB", "CD", "EF"])
 
 # encipher a letter
-ENGIMA = Engima(B, IV, II, I, PB, KB)
+ENIGMA = Enigma(B, IV, II, I, PB, KB)
+
+# set the rings
+ENIGMA.set_rings((5,26,2))
 
 # set message key
-ENGIMA.set_key("CAT")
-ENGIMA.rotor1.show()
+ENIGMA.set_key("CAT")
+ENIGMA.rotor1.show()
 
-message = "TEST"
+message = "TESTINGTESTINGTESTINGTESTING"
 cipher_text = ""
 for letter in message:
-    cipher_text = cipher_text + ENGIMA.encipher(letter)
+    cipher_text = cipher_text + ENIGMA.encipher(letter)
 print(cipher_text)
 # print(ENGIMA.encipher("A"))
