@@ -12,6 +12,10 @@ pygame.init()
 pygame.font.init()
 pygame.display.set_caption("Enigma Simulator")
 
+# create fonts
+MONO = pygame.font.SysFont("Freemono", 25)
+BOLD = pygame.font.SysFont("FreeMono", 25, bold=True)
+
 # global variables
 WIDTH = 1200
 HEIGHT = 700
@@ -50,9 +54,16 @@ ENIGMA.set_rings((5,26,2))
 
 animating = True
 while animating:
-    SCREEN.fill("#333333")
-    pygame.display.flip()
 
+    # background
+    SCREEN.fill("#333333")
+
+    # draw enigma machine
+    KB.draw(SCREEN, 1000, 100, 100, 500, BOLD)
+    PB.draw(SCREEN, 800, 100, 100, 500, BOLD)
+
+    # update screen
+    pygame.display.flip()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
