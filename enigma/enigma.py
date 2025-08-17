@@ -1,4 +1,4 @@
-class Engima:
+class Enigma:
 
     def __init__(self, reflector, rotor1, rotor2, rotor3, plugboard, keyboard):
         self.reflector = reflector
@@ -7,6 +7,11 @@ class Engima:
         self.rotor3 = rotor3
         self.plugboard = plugboard
         self.keyboard = keyboard
+
+    def set_rings(self, rings):
+        self.rotor1.set_ring(rings[0])
+        self.rotor2.set_ring(rings[1])
+        self.rotor3.set_ring(rings[2])
 
     def set_key(self, key):
         self.rotor1.rotate_to_letter(key[0])
