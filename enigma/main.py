@@ -16,9 +16,18 @@ C = Reflector("FVPJIAOYEDRZXWGCTKUQSBNMHL")
 
 # keyboards and plugboards
 KB = Keyboard()
-PB = Plugboard(["AR", "GK", "OX"])
+PB = Plugboard(["AB", "CD", "EF"])
 
 # encipher a letter
-ENGIMA = Engima(A, I, II, III, PB, KB)
+ENGIMA = Engima(B, IV, II, I, PB, KB)
 
-print(ENGIMA.encipher("A"))
+# set message key
+ENGIMA.set_key("CAT")
+ENGIMA.rotor1.show()
+
+message = "TEST"
+cipher_text = ""
+for letter in message:
+    cipher_text = cipher_text + ENGIMA.encipher(letter)
+print(cipher_text)
+# print(ENGIMA.encipher("A"))
