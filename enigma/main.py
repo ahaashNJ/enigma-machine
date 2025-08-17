@@ -1,8 +1,21 @@
+import pygame
+pygame.init()
+
 from keyboard import Keyboard
 from plugboard import Plugboard
 from rotor import Rotor
 from reflector import Reflector
 from enigma import Enigma
+
+# setup pygame
+pygame.init()
+pygame.font.init()
+pygame.display.set_caption("Enigma Simulator")
+
+# global variables
+WIDTH = 1200
+HEIGHT = 700
+SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # historical enigma rotors and reflectors
 I = Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q")
@@ -25,12 +38,22 @@ ENIGMA = Enigma(B, IV, II, I, PB, KB)
 ENIGMA.set_rings((5,26,2))
 
 # set message key
-ENIGMA.set_key("CAT")
-ENIGMA.rotor1.show()
+# ENIGMA.set_key("CAT")
+# ENIGMA.rotor1.show()
 
-message = "TESTINGTESTINGTESTINGTESTING"
-cipher_text = ""
-for letter in message:
-    cipher_text = cipher_text + ENIGMA.encipher(letter)
-print(cipher_text)
+# message = "TESTINGTESTINGTESTINGTESTING"
+# cipher_text = ""
+# for letter in message:
+#     cipher_text = cipher_text + ENIGMA.encipher(letter)
+# print(cipher_text)
 # print(ENGIMA.encipher("A"))
+
+animating = True
+while animating:
+    SCREEN.fill("#333333")
+    pygame.display.flip()
+
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            animating= False
