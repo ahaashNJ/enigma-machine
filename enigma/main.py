@@ -17,7 +17,7 @@ MONO = pygame.font.SysFont("Freemono", 25)
 BOLD = pygame.font.SysFont("FreeMono", 25, bold=True)
 
 # global variables
-WIDTH = 1200
+WIDTH = 1400
 HEIGHT = 700
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 
@@ -36,13 +36,13 @@ KB = Keyboard()
 PB = Plugboard(["AB", "CD", "EF"])
 
 # encipher a letter
-ENIGMA = Enigma(B, IV, II, I, PB, KB)
+ENIGMA = Enigma(B, I, II, III, PB, KB)
 
 # set the rings
-ENIGMA.set_rings((5,26,2))
+ENIGMA.set_rings((1,1,1))
 
 # set message key
-# ENIGMA.set_key("CAT")
+ENIGMA.set_key("CAT")
 # ENIGMA.rotor1.show()
 
 # message = "TESTINGTESTINGTESTINGTESTING"
@@ -59,8 +59,12 @@ while animating:
     SCREEN.fill("#333333")
 
     # draw enigma machine
-    KB.draw(SCREEN, 1000, 100, 100, 500, BOLD)
-    PB.draw(SCREEN, 800, 100, 100, 500, BOLD)
+    KB.draw(SCREEN, 1200, 100, 100, 500, BOLD)
+    PB.draw(SCREEN, 1000, 100, 100, 500, BOLD)
+    III.draw(SCREEN, 800, 100, 100, 500, BOLD)
+    II.draw(SCREEN, 600, 100, 100, 500, BOLD)
+    I.draw(SCREEN, 400, 100, 100, 500, BOLD)
+    A.draw(SCREEN, 200, 100, 100, 500, BOLD)
 
     # update screen
     pygame.display.flip()
@@ -68,3 +72,6 @@ while animating:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             animating= False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_DOWN:
+                III.rotate()
