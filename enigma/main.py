@@ -20,6 +20,11 @@ BOLD = pygame.font.SysFont("FreeMono", 25, bold=True)
 WIDTH = 1400
 HEIGHT = 700
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
+MARGINS = {"top":200, "bottom":100, "left":100, "right":100}
+GAP = 100
+
+INPUT = ""
+OUTPUT = ""
 
 # historical enigma rotors and reflectors
 I = Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q")
@@ -58,6 +63,16 @@ while animating:
     # background
     SCREEN.fill("#333333")
 
+    # input text
+    text = BOLD.render(INPUT, True, "white")
+    text_box = text.get_rect(center = (WIDTH/2, MARGINS["top"]/4))
+    SCREEN.blit(text, text_box)
+
+    # output
+    text = MONO.render(OUTPUT, True, "white")
+    text_box = text.get_rect(center = (WIDTH/2, MARGINS["top"]/4+25))
+    SCREEN.blit(text, text_box)
+
     # draw enigma machine
     KB.draw(SCREEN, 1200, 100, 100, 500, BOLD)
     PB.draw(SCREEN, 1000, 100, 100, 500, BOLD)
@@ -75,3 +90,10 @@ while animating:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
                 III.rotate()
+            else:
+                key = event.unicode
+                if key in "abcdefghiklmnopqrstuvwxyz":
+                    letter = key.upper()
+                    INPUT = INPUT + letter
+                    OUTPUT = OUTPUT + letter
+
