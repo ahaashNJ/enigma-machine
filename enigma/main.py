@@ -21,7 +21,7 @@ BOLD = pygame.font.SysFont("FreeMono", 25, bold=True)
 WIDTH = 1400
 HEIGHT = 700
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
-MARGINS = {"top":100, "bottom":100, "left":100, "right":100}
+MARGINS = {"top":150, "bottom":80, "left":100, "right":100}
 GAP = 70
 
 INPUT = ""
@@ -85,11 +85,14 @@ while animating:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
                 III.rotate()
+            elif event.key == pygame.K_SPACE:
+                INPUT = INPUT + " "
+                OUTPUT = OUTPUT + " "
             else:
                 key = event.unicode
                 if key in "abcdefghiklmnopqrstuvwxyz":
                     letter = key.upper()
                     INPUT = INPUT + letter
-                    cipher = ENIGMA.encipher(letter)
+                    PATH, cipher = ENIGMA.encipher(letter)
                     OUTPUT = OUTPUT + cipher
 
