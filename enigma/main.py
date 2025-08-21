@@ -6,6 +6,7 @@ from plugboard import Plugboard
 from rotor import Rotor
 from reflector import Reflector
 from enigma import Enigma
+from draw import draw
 
 # setup pygame
 pygame.init()
@@ -20,11 +21,12 @@ BOLD = pygame.font.SysFont("FreeMono", 25, bold=True)
 WIDTH = 1400
 HEIGHT = 700
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
-MARGINS = {"top":200, "bottom":100, "left":100, "right":100}
-GAP = 100
+MARGINS = {"top":100, "bottom":100, "left":100, "right":100}
+GAP = 70
 
 INPUT = ""
 OUTPUT = ""
+PATH = []
 
 # historical enigma rotors and reflectors
 I = Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q")
@@ -73,15 +75,8 @@ while animating:
     text_box = text.get_rect(center = (WIDTH/2, MARGINS["top"]/4+25))
     SCREEN.blit(text, text_box)
 
-    # draw enigma machine
-    KB.draw(SCREEN, 1200, 100, 100, 500, BOLD)
-    PB.draw(SCREEN, 1000, 100, 100, 500, BOLD)
-    III.draw(SCREEN, 800, 100, 100, 500, BOLD)
-    II.draw(SCREEN, 600, 100, 100, 500, BOLD)
-    I.draw(SCREEN, 400, 100, 100, 500, BOLD)
-    A.draw(SCREEN, 200, 100, 100, 500, BOLD)
-
-    # update screen
+    # draw engima machine
+    draw(ENIGMA, PATH, SCREEN, WIDTH, HEIGHT, MARGINS, GAP, BOLD)
     pygame.display.flip()
 
     for event in pygame.event.get():
@@ -95,5 +90,6 @@ while animating:
                 if key in "abcdefghiklmnopqrstuvwxyz":
                     letter = key.upper()
                     INPUT = INPUT + letter
-                    OUTPUT = OUTPUT + letter
+                    cipher = ENIGMA.encipher(letter)
+                    OUTPUT = OUTPUT + cipher
 
