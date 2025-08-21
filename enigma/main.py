@@ -52,14 +52,6 @@ ENIGMA.set_rings((1,1,1))
 
 # set message key
 ENIGMA.set_key("CAT")
-# ENIGMA.rotor1.show()
-
-# message = "TESTINGTESTINGTESTINGTESTING"
-# cipher_text = ""
-# for letter in message:
-#     cipher_text = cipher_text + ENIGMA.encipher(letter)
-# print(cipher_text)
-# print(ENGIMA.encipher("A"))
 
 animating = True
 while animating:
