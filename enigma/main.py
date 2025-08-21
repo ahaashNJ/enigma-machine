@@ -27,6 +27,8 @@ GAP = 70
 INPUT = ""
 OUTPUT = ""
 PATH = []
+ERROR_MESSAGE = ""
+ERROR_EXPIRES_AT = 0
 
 # historical enigma rotors and reflectors
 I = Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", "Q")
@@ -76,23 +78,34 @@ while animating:
     SCREEN.blit(text, text_box)
 
     # draw engima machine
-    draw(ENIGMA, PATH, SCREEN, WIDTH, HEIGHT, MARGINS, GAP, BOLD)
+    draw(ENIGMA, PATH, SCREEN, WIDTH, HEIGHT, MARGINS, GAP, BOLD, ERROR_MESSAGE)
     pygame.display.flip()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            animating= False
+            animating = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
                 III.rotate()
             elif event.key == pygame.K_SPACE:
                 INPUT = INPUT + " "
                 OUTPUT = OUTPUT + " "
+                ERROR_MESSAGE = ""
             else:
                 key = event.unicode
-                if key in "abcdefghijklmnopqrstuvwxyz":
+                if key.isalpha() and key.isascii():
                     letter = key.upper()
                     INPUT = INPUT + letter
                     PATH, cipher = ENIGMA.encipher(letter)
                     OUTPUT = OUTPUT + cipher
+                    ERROR_MESSAGE = ""
+                    ERROR_EXPIRES_AT = 0
+                else:
+                    ERROR_MESSAGE = "Invalid character! Only A–Z letters allowed."
+                    ERROR_EXPIRES_AT = pygame.time.get_ticks() + 1500
+
+
+    if ERROR_MESSAGE and ERROR_EXPIRES_AT and pygame.time.get_ticks() > ERROR_EXPIRES_AT:
+        ERROR_MESSAGE = ""
+        ERROR_EXPIRES_AT = 0
 

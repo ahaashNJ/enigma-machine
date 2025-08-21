@@ -1,6 +1,6 @@
 import pygame
 
-def draw(enigma, path, screen, width, height, margins, gap, font):
+def draw(enigma, path, screen, width, height, margins, gap, font, error_message: str | None = None):
 
     # width and height of components
     w = (width - margins["left"] - margins["right"] - 5 * gap) / 6
@@ -51,6 +51,21 @@ def draw(enigma, path, screen, width, height, margins, gap, font):
         title = font.render(names[i], True, "white")
         text_box = title.get_rect(center = (x,y))
         screen.blit(title, text_box)
+
+    # error
+    if error_message:
+        banner_h = 40
+        banner_w = width - margins["left"] - margins["right"]
+        banner_x = margins["left"]
+        banner_y = margins["top"] + 500
+
+        banner = pygame.Surface((banner_w, banner_h), flags=pygame.SRCALPHA)
+        banner.fill((30, 30, 30, 200))
+        screen.blit(banner, (banner_x, banner_y))
+
+        err_text = font.render(error_message, True, (240, 128, 128))
+        err_rect = err_text.get_rect(center=(width // 2, banner_y + banner_h // 2))
+        screen.blit(err_text, err_rect)
 
 
 
