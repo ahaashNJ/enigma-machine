@@ -90,7 +90,7 @@ while animating:
                 OUTPUT = OUTPUT + " "
             else:
                 key = event.unicode
-                if key in "abcdefghiklmnopqrstuvwxyz":
+                if key in "abcdefghijklmnopqrstuvwxyz":
                     letter = key.upper()
                     INPUT = INPUT + letter
                     PATH, cipher = ENIGMA.encipher(letter)
